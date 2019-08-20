@@ -14,6 +14,7 @@ export default class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      orderDesc: false,
     }
   }
 
@@ -35,6 +36,12 @@ export default class Game extends React.Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+    });
+  }
+
+  toggleOrder() {
+    this.setState({
+      orderDesc: !this.state.orderDesc,
     });
   }
 
@@ -69,6 +76,9 @@ export default class Game extends React.Component {
         </li>
       );
     });
+    if (this.state.orderDesc) {
+      moves.reverse();
+    }
 
     let status;
     if (winner) {
@@ -89,7 +99,8 @@ export default class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <button onClick={this.toggleOrder.bind(this)}>Order: {this.state.orderDesc ? 'DESC' : 'ASC'}</button>
+          <ol reversed={this.state.orderDesc}>{moves}</ol>
         </div>
       </div>
     );
