@@ -6,6 +6,7 @@ export default class Board extends React.Component {
     return (
       <Square
         value={this.props.squares[i]}
+        isActive={this.props.active.indexOf(i) > -1}
         onClick={() => this.props.onClick(i)}
       />
     );
